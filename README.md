@@ -12,7 +12,7 @@ This script monitors the OpenAI website for the presence of the text "(DALL·E 3
    pip install selenium beautifulsoup4
    ```
 
-> :warning: **Geckodriver**: Ensure you have the geckodriver for Firefox downloaded and added to your system's PATH.
+> :warning: **Geckodriver**: Ensure you have the geckodriver for Firefox (or another browser driver) downloaded and added to your system's PATH.
 
 ### Script Setup
 
