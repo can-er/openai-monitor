@@ -36,9 +36,9 @@ This script monitors the OpenAI website for the presence of the text "(DALL·E 3
    crontab -e
    ```
 
-   Add the following line to run the script every hour:
+   Add the following line to run the script every 5 minutes:
    ```bash
-   0 * * * * /usr/bin/python3 /opt/openai_monitor/openai_monitor.py >> /var/log/openai_monitor.log 2>> /var/log/openai_monitor_error.log
+   */5 * * * * /usr/bin/python3 /opt/openai_monitor/openai_monitor.py >> /var/log/openai_monitor.log 2>> /var/log/openai_monitor_error.log
    ```
 
    Save and exit the editor.
