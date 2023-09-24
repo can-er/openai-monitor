@@ -1,7 +1,3 @@
-Certainly! Here's the updated README with the `git clone` step added to the installation process:
-
----
-
 # OpenAI Monitor Script
 
 This script monitors the OpenAI website for the presence of the text "(DALL·E 3 coming soon!)" and sends a notification via Telegram if the text is not found.
