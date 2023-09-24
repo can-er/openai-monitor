@@ -28,7 +28,7 @@ def main():
     options = Options()
     options.add_argument('-headless')  # This runs the browser in the background
 
-    with webdriver.Firefox(options=options) as driver:
+    with webdriver.Chrome(options=options) as driver:
         driver.get(URL)
         time.sleep(3)  # Wait for 3 seconds
         page_source = driver.page_source
