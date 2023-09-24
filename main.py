@@ -1,46 +1,37 @@
-import time
-import requests
 import os
+import time
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from bs4 import BeautifulSoup
+from selenium.webdriver.chrome.options import Options
+import requests
 
-# OpenAI Monitoring Configuration
+# Constants
 URL = "https://openai.com/dall-e-3"
 SEARCH_TEXT = "(DALL·E 3 coming soon!)"
-
-# Telegram Configuration
-TOKEN = os.environ["TELEGRAM_TOKEN"]
-CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
-MESSAGE = "The text '(DALL·E 3 coming soon!)' is not found anymore on OpenAI's website."
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
 
 def send_telegram_notification(message):
-    """Send a notification message via Telegram."""
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
     payload = {
-        "chat_id": CHAT_ID,
+        "chat_id": TELEGRAM_CHAT_ID,
         "text": message
     }
-    response = requests.post(url, data=payload)
+    response = requests.post(TELEGRAM_API_URL, data=payload)
     return response.json()
 
 def main():
     options = Options()
-    options.add_argument('-headless')  # This runs the browser in the background
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-gpu")
 
     with webdriver.Chrome(options=options) as driver:
         driver.get(URL)
-        time.sleep(3)  # Wait for 3 seconds
-        page_source = driver.page_source
+        time.sleep(3)  # Wait for 3 seconds to ensure the page is fully loaded
 
-    soup = BeautifulSoup(page_source, 'html.parser')
-    matching_elements = soup.find_all(string=lambda text: SEARCH_TEXT in text)
-
-    if not matching_elements:
-        send_telegram_notification(MESSAGE)
-        print(f"Text '{SEARCH_TEXT}' not found! Notification sent.")
-    else:
-        print(f"Text '{SEARCH_TEXT}' found!")
+        # Check if the desired text is present
+        if SEARCH_TEXT not in driver.page_source:
+            send_telegram_notification(f"The text '{SEARCH_TEXT}' was not found on {URL}!")
 
 if __name__ == "__main__":
     main()
