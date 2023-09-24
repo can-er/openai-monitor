@@ -71,7 +71,7 @@ This script monitors the OpenAI website for the presence of the text "(DALL·E 3
 
 ## Usage
 
-Once set up, the script will run automatically every hour. It will check the OpenAI website for the specified text and send a notification to your Telegram if the text is not found.
+Once set up, the script will run automatically 5min. It will check the OpenAI website for the specified text and send a notification to your Telegram if the text is not found.
 
 ## Troubleshooting
 
