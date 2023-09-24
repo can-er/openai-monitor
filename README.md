@@ -1,7 +1,3 @@
-Of course! Here's the updated README with the specified changes:
-
----
-
 # OpenAI Monitor Script
 
 This script monitors the OpenAI website for the presence of the text "(DALL·E 3 coming soon!)" and sends a notification via Telegram if the text is not found.
@@ -52,6 +48,3 @@ Once set up, the script will run automatically every 5 minutes. It will check th
 1. **Check Logs**: If you suspect the script isn't working as expected, check the `~/logs/openai_monitor.log` and `~/logs/openai_monitor_error.log` files for any error messages or outputs.
 2. **Dependencies**: Ensure all dependencies are correctly installed and accessible to the script.
 
----
-
-This README now includes the `.env` setup details as you requested.
