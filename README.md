@@ -1,50 +1,72 @@
-# OpenAI Monitor Script
+# OpenAI Monitor
 
-This script monitors the OpenAI website for the presence of the text "(DALL·E 3 coming soon!)" and sends a notification via Telegram if the text is not found.
+This script monitors the OpenAI website for a specific text and sends a notification via Telegram if the text is not found.
 
-## Installation
+## Prerequisites
 
-### Dependencies
-
-1. **Python**: Ensure you have Python 3 installed.
-2. **Selenium & BeautifulSoup**: 
+1. **Python**: Ensure you have Python 3.x installed.
+2. **Selenium**: Install the Selenium package using pip:
    ```bash
-   pip install selenium beautifulsoup4
+   pip install selenium
    ```
+3. **Requests**: Install the Requests package using pip:
+   ```bash
+   pip install requests
+   ```
+4. **Chrome**: Ensure you have Google Chrome installed.
+5. **Chromedriver**: Ensure you have the chromedriver for Chrome downloaded and added to your system's PATH.
 
-> :warning: **Geckodriver**: Ensure you have the geckodriver for Firefox (or any other browser driver) downloaded and added to your system's PATH.
-
-### Script Setup
+## Setup
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/can-er/openai-monitor.git ~/openai-monitor
+   git clone https://github.com/can-er/openai-monitor.git
+   cd openai-monitor
    ```
 
-2. **Setup the Environment File**:
-   Edit the `.env` file in the root of the project and replace `YOUR_TOKEN` and `YOUR_CHAT_ID` with your Telegram bot token and chat ID respectively:
+2. **Setup Telegram Bot**:
+   - Start a chat with the [BotFather](https://t.me/botfather) on Telegram.
+   - Create a new bot.
+   - After creating the bot, you will get a `YOUR_TELEGRAM_TOKEN`.
+   - Start the bot and send any message to it.
+   - Retrieve the chat ID by visiting `https://api.telegram.org/botYOUR_TELEGRAM_TOKEN/getUpdates` in a browser. Look for the "id" inside the "chat" object.
+
+3. **Setup the Environment File**:
+   Edit the `.env` file in the root of the project and replace `YOUR_TELEGRAM_TOKEN` with your Telegram bot token.
+
    ```makefile
-   TELEGRAM_TOKEN=YOUR_TOKEN
-   TELEGRAM_CHAT_ID=YOUR_CHAT_ID
+   TELEGRAM_TOKEN=YOUR_TELEGRAM_TOKEN
    ```
 
-3. **Crontab Setup**:
-   Open the crontab editor:
+4. **Load Environment Variables**:
+   Before running the script, load the environment variables:
+   ```bash
+   source .env
+   ```
+
+5. **Run the Script**:
+   ```bash
+   python3 main.py
+   ```
+
+## Crontab Setup
+
+To run the script every 5 minutes:
+
+1. Open the crontab editor:
    ```bash
    crontab -e
    ```
 
-   Add the following line to run the script every 5 minutes:
+2. Add the following line to run the script every 5 minutes and log the output:
    ```bash
-   */5 * * * * . ~/openai-monitor/.env; python3 ~/openai-monitor/openai_monitor.py >> ~/logs/openai_monitor.log 2>> ~/logs/openai_monitor_error.log
+   */5 * * * * cd ~/openai-monitor && source .env && python3 main.py >> /var/log/openai_monitor.log 2>> /var/log/openai_monitor_error.log
    ```
 
-## Usage
-
-Once set up, the script will run automatically every 5 minutes. It will check the OpenAI website for the specified text and send a notification to your Telegram if the text is not found.
+3. Save and exit the editor.
 
 ## Troubleshooting
 
-1. **Check Logs**: If you suspect the script isn't working as expected, check the `~/logs/openai_monitor.log` and `~/logs/openai_monitor_error.log` files for any error messages or outputs.
-2. **Dependencies**: Ensure all dependencies are correctly installed and accessible to the script.
-
+1. **Ensure all dependencies are installed**: This includes Python packages and browser drivers.
+2. **Check the logs**: If using the crontab setup, check `/var/log/openai_monitor.log` and `/var/log/openai_monitor_error.log` for any error messages or logs.
+3. **Ensure environment variables are loaded**: If running the script manually, ensure that you've sourced the `.env` file to load the environment variables.
