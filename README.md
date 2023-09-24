@@ -77,7 +77,3 @@ Once set up, the script will run automatically every hour. It will check the Ope
 
 1. **Check Logs**: If you suspect the script isn't working as expected, check the log files for any error messages or outputs.
 2. **Dependencies**: Ensure all dependencies are correctly installed and accessible to the script.
-
----
-
-This README now includes the step to clone the repository from GitHub as part of the installation process.
