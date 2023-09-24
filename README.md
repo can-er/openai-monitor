@@ -29,7 +29,7 @@ This script monitors the OpenAI website for a specific text and sends a notifica
    - Create a new bot.
    - After creating the bot, you will get a `YOUR_TELEGRAM_TOKEN`.
    - Start the bot and send any message to it.
-   - Retrieve the chat ID by visiting `https://api.telegram.org/botYOUR_TELEGRAM_TOKEN/getUpdates` in a browser. Look for the "id" inside the "chat" object.
+   - (optionnal) Retrieve the chat ID by visiting `https://api.telegram.org/botYOUR_TELEGRAM_TOKEN/getUpdates` in a browser. Look for the "id" inside the "chat" object.
 
 3. **Setup the Environment File**:
    Edit the `.env` file in the root of the project and replace `YOUR_TELEGRAM_TOKEN` with your Telegram bot token.
