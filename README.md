@@ -5,16 +5,12 @@ This script monitors the OpenAI website for a specific text and sends a notifica
 ## Prerequisites
 
 1. **Python**: Ensure you have Python 3.x installed.
-2. **Selenium**: Install the Selenium package using pip:
+2. **Dependencies**: Install `selenium` and `requests` packages using pip:
    ```bash
-   pip install selenium
+   pip install selenium requests
    ```
-3. **Requests**: Install the Requests package using pip:
-   ```bash
-   pip install requests
-   ```
-4. **Chrome**: Ensure you have Google Chrome installed.
-5. **Chromedriver**: Ensure you have the chromedriver for Chrome downloaded and added to your system's PATH.
+3. **Chrome**: Ensure you have Google Chrome installed.
+4. **Chromedriver**: Ensure you have the chromedriver for Chrome downloaded and added to your system's PATH.
 
 ## Setup
 
